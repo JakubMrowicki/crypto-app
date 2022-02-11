@@ -21,12 +21,12 @@ function FeaturedCryptos() {
     return (
       <div className='flex-col'>
           <div className='text-center mt-4'>
-              <h2 className='font-bold text-xl'>Top Cryptos</h2>
+              <h2 className='font-bold text-4xl'>Top Cryptos</h2>
           </div>
           <div className='mt-16'>
-              <div className='grid grid-cols-4'>
+              <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
                   {data.map((c) => (
-                      <div className='flex-col items-center justify-center text-center'>
+                      <div className='flex-col rounded-xl items-center justify-center text-center mb-8'>
                         <img className='h-48 m-auto' src={c.image} alt="" />
                         <h2 className='pt-4 font-bold text-lg'>{c.name}</h2>
                         <p>${c.current_price.toLocaleString()}</p>
@@ -43,7 +43,7 @@ function FeaturedCryptos() {
                   ))}
               </div>
           </div>
-          <div className='text-center mt-8'>
+          <div className='text-center mt-4'>
             <button className='font-bold text-xl'>See more...</button>
           </div>
       </div>
