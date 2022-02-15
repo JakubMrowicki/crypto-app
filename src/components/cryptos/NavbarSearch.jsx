@@ -1,39 +1,35 @@
-import { useState } from "react"
-import axios from "axios"
+import { useState, useContext } from "react"
+import CryptoContext from "../../context/CryptoContext"
 
 function NavbarSearch() {
+    const { searchCryptos } = useContext(CryptoContext)
+
     const [text, setText] = useState('')
-
-    const coingecko = "https://api.coingecko.com/api/v3/coins"
-
-    const searchCryptos = async (text) => {
-        const response = await axios.get(`${coingecko}/${text}`)
-        return response.data
-    }
 
     const handleChange = (e) => setText(e.target.value)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (text === '') {
-            alert('Please enter something')
+            alert('Please enter something! (bitcoin, ethereum etc.)')
         } else {
             const cryptos = await searchCryptos(text)
             console.log(cryptos)
             setText('')
+            
         }
     }
 
     return (
-        <div class="relative text-center mr-8 mx-auto text-gray-400 lg:block hidden">
+        <div className="relative text-center mr-8 mx-auto text-gray-400 lg:block hidden">
             <form onSubmit={handleSubmit}>
                 <input
-                    class="border-2 border-gray-400 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
+                    className="border-2 border-gray-400 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
                     type="text" name="search" placeholder="Search..."
                     value={text}
                     onChange={handleChange} />
-                <button type="submit" class="absolute right-0 top-0 mt-3 mr-2">
-                    <svg class="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
+                    <svg className="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                         version="1.1" id="Capa_1" x="0px" y="0px"
                         viewBox="0 0 56.966 56.966"
                         width="512px" height="512px">

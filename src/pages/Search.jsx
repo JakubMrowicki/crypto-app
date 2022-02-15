@@ -1,6 +1,11 @@
+import CryptoItem from "../components/cryptos/CryptoItem"
+
 function Search() {
   return (
-    <div>Search</div>
+    <div>
+      Search page
+      <CryptoItem />
+    </div>
   )
 }
 

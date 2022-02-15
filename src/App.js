@@ -7,10 +7,11 @@ import Watchlist from "./pages/Watchlist";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Search from "./pages/Search";
+import { CryptoProvider } from './context/CryptoContext'
 
 function App() {
   return (
-    <div className="App">
+    <CryptoProvider>
       <Navbar />
       <Router>
         <Routes>
@@ -24,7 +25,7 @@ function App() {
           <Route path="/search" element={<Search />} />
         </Routes>
       </Router>
-    </div>
+    </CryptoProvider>
   );
 }
 

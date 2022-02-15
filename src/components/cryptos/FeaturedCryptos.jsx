@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { FiArrowUpRight, FiArrowDownRight } from 'react-icons/fi'
 import axios from 'axios';
+import CryptoContext from '../../context/CryptoContext';
 
 function FeaturedCryptos() {
-
+    const { coingecko } = useContext(CryptoContext)
+    
     const [data, setData] = useState(null)
-
-    const coingecko = "https://api.coingecko.com/api/v3/coins"
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,17 +27,17 @@ function FeaturedCryptos() {
           <div className=''>
               <div className='bg-white grid lg:grid-cols-4 sm:grid-cols-2 border-2 pt-4'>
                   {data.map((c) => (
-                      <div className='flex-col border-b-2 sm:border-0 py-8 items-center justify-center text-center'>
-                        <img className='h-48 m-auto' src={c.image} alt="" />
-                        <h2 className='font-bold text-lg'>{c.name}</h2>
+                      <div key={c.id} className='flex-col border-b-2 sm:border-0 py-8 items-center justify-center text-center'>
+                        <img className='h-40 m-auto' src={c.image} alt="" />
+                        <h2 className='font-bold pt-4 text-lg'>{c.name}</h2>
                         <p>${c.current_price.toLocaleString()}</p>
                         {c.price_change_percentage_24h < 0 ? (
                             <div className='flex justify-center'>
-                                <span className='flex font-bold red'><FiArrowDownRight />{c.price_change_percentage_24h.toFixed(2)}</span>
+                                <span className='flex red'><FiArrowDownRight />{c.price_change_percentage_24h.toFixed(2)}</span>
                             </div>
                         ) : (
                             <div className='flex justify-center'>
-                                <span className='font-bold flex green'><FiArrowUpRight />{c.price_change_percentage_24h.toFixed(2)}</span>
+                                <span className='flex green'><FiArrowUpRight />{c.price_change_percentage_24h.toFixed(2)}</span>
                             </div>
                         )}
                       </div>
