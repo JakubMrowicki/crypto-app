@@ -1,22 +1,24 @@
 import { useState, useContext } from "react"
 import CryptoContext from "../../context/CryptoContext"
+import { useNavigate } from "react-router-dom"
 
 function NavbarSearch() {
-    const { searchCryptos } = useContext(CryptoContext)
+    const { searchCryptos, searchResults } = useContext(CryptoContext)
 
-    const [text, setText] = useState('')
+    const [searchInput, setSearchInput] = useState('')
 
-    const handleChange = (e) => setText(e.target.value)
+    const navigate = useNavigate()
+
+    const handleChange = (e) => setSearchInput(e.target.value)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (text === '') {
+        if (searchInput === '') {
             alert('Please enter something! (bitcoin, ethereum etc.)')
         } else {
-            const cryptos = await searchCryptos(text)
-            console.log(cryptos)
-            setText('')
-            
+            searchCryptos(searchInput).then(console.log(searchResults))
+            setSearchInput('')
+            navigate(`/search/${searchInput}`)
         }
     }
 
@@ -26,7 +28,7 @@ function NavbarSearch() {
                 <input
                     className="border-2 border-gray-400 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
                     type="text" name="search" placeholder="Search..."
-                    value={text}
+                    value={searchInput}
                     onChange={handleChange} />
                 <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
                     <svg className="text-gray-400 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"

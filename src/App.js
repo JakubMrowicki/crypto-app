@@ -12,8 +12,8 @@ import { CryptoProvider } from './context/CryptoContext'
 function App() {
   return (
     <CryptoProvider>
-      <Navbar />
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/watchlist" element={<Watchlist />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/signup" element={<Signup />}/>
-          <Route path="/search" element={<Search />} />
+          <Route path="/search/:id" element={<Search />} />
         </Routes>
       </Router>
     </CryptoProvider>

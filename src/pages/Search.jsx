@@ -1,10 +1,9 @@
-import CryptoItem from "../components/cryptos/CryptoItem"
+import SearchResult from "../components/cryptos/SearchResult"
 
 function Search() {
   return (
     <div>
-      Search page
-      <CryptoItem />
+      <SearchResult />
     </div>
   )
 }

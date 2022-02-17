@@ -1,22 +1,15 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { FiArrowUpRight, FiArrowDownRight } from 'react-icons/fi'
-import axios from 'axios';
 import CryptoContext from '../../context/CryptoContext';
 
 function FeaturedCryptos() {
-    const { coingecko } = useContext(CryptoContext)
-    
-    const [data, setData] = useState(null)
+    const { getFeatured, featured } = useContext(CryptoContext)
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`${coingecko}/markets?vs_currency=usd&order=market_cap_desc&per_page=8&page=1&sparkline=false`)
-            setData(response.data)
-        }
-        fetchData()
+        getFeatured()
     }, [])
 
-    if (!data) return null
+    if (!featured) return null
 
     return (
     <div className='bg-gray-100 h-screen'>
@@ -26,7 +19,7 @@ function FeaturedCryptos() {
           </div>
           <div className=''>
               <div className='bg-white grid lg:grid-cols-4 sm:grid-cols-2 border-2 pt-4'>
-                  {data.map((c) => (
+                  {featured.map((c) => (
                       <div key={c.id} className='flex-col border-b-2 sm:border-0 py-8 items-center justify-center text-center'>
                         <img className='h-40 m-auto' src={c.image} alt="" />
                         <h2 className='font-bold pt-4 text-lg'>{c.name}</h2>
