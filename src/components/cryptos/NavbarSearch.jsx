@@ -18,7 +18,7 @@ function NavbarSearch() {
     } else {
       searchCryptos(searchInput)
       setSearchInput('')
-      navigate(`/search/${searchInput}`, { state: isLoading })
+      navigate(`/search/${searchInput}`, { state: !isLoading })
     }
   }
 

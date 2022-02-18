@@ -2,13 +2,13 @@ import CryptoContext from '../../context/CryptoContext'
 import { useContext } from 'react'
 
 function SearchResult() {
-  const { searchResults } = useContext(CryptoContext)
+  const { searchResults, isLoading } = useContext(CryptoContext)
 
   return (
     <div className='bg-gray-200 h-screen'>
       <div className='container mx-auto flex-col'>
         <div className='text-start p-8'>
-          {!searchResults 
+          {isLoading 
           ? <h2 className='font-bold text-2xl'>No results</h2>
           : searchResults.coins.map((coin) => (
               coin.market_cap_rank && coin.market_cap_rank <= 500
