@@ -3,21 +3,21 @@ import { FiArrowUpRight, FiArrowDownRight } from 'react-icons/fi'
 import CryptoContext from '../../context/CryptoContext';
 
 function FeaturedCryptos() {
-    const { getFeatured, featured } = useContext(CryptoContext)
+    const { getFeatured, featured, isLoading } = useContext(CryptoContext)
 
     useEffect(() => {
         getFeatured()
     }, [])
 
-    if (!featured) return null
+    if (isLoading) return null
 
     return (
-    <div className='bg-gray-100 h-screen'>
+    <div className='bg-gray-200 h-screen'>
       <div className='container mx-auto flex-col'>
           <div className='text-start p-8'>
               <h2 className='font-bold text-2xl'>Top Cryptos</h2>
           </div>
-          <div className=''>
+          <div>
               <div className='bg-white grid lg:grid-cols-4 sm:grid-cols-2 border-2 pt-4'>
                   {featured.map((c) => (
                       <div key={c.id} className='flex-col border-b-2 sm:border-0 py-8 items-center justify-center text-center'>

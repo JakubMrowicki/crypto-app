@@ -3,21 +3,23 @@ import { useContext } from 'react'
 
 function SearchResult() {
   const { searchResults } = useContext(CryptoContext)
-  if (searchResults === null) {
-    return <h1>Loading...</h1>
-  } else {
-    return (
-      <div>
-        <div className='bg-gray-100 h-screen'>
-          <div className='container mx-auto flex-col'>
-            {searchResults.coins.map((coin, idx) => (
-              <li key={idx}>{coin.name}</li>
-            ))}
-          </div>
+
+  return (
+    <div className='bg-gray-200 h-screen'>
+      <div className='container mx-auto flex-col'>
+        <div className='text-start p-8'>
+          {!searchResults 
+          ? <h2 className='font-bold text-2xl'>No results</h2>
+          : searchResults.coins.map((coin) => (
+              coin.market_cap_rank && coin.market_cap_rank <= 500
+              ? <h1 key={coin.id}>{coin.name} ({coin.symbol})</h1>
+              : null
+            ))
+          }
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default SearchResult

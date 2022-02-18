@@ -4,6 +4,7 @@ import axios from 'axios'
 const CryptoContext = createContext()
 
 export const CryptoProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [featured, setFeatured] = useState(null)
   const [searchResults, setSearchResults] = useState(null)
 
@@ -14,19 +15,22 @@ export const CryptoProvider = ({ children }) => {
       `${coingecko}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=8&page=1&sparkline=false`
     )
     setFeatured(response.data)
+    setIsLoading(false)
   }
 
   const searchCryptos = async (text) => {
     const response = await axios.get(
       `${coingecko}/search?query=${text.toLowerCase()}`
     )
+    console.log(response.data.coins)
     setSearchResults(response.data)
-    // .coins.filter(item => item.market_cap_rank && item.market_cap_rank <= 500)
+    setIsLoading(false)
   }
 
   return (
     <CryptoContext.Provider
       value={{
+        isLoading,
         featured,
         getFeatured,
         searchResults,

@@ -3,7 +3,7 @@ import CryptoContext from '../../context/CryptoContext'
 import { useNavigate } from 'react-router-dom'
 
 function NavbarSearch() {
-  const { searchCryptos, searchResults } = useContext(CryptoContext)
+  const { searchCryptos, isLoading } = useContext(CryptoContext)
 
   const [searchInput, setSearchInput] = useState('')
 
@@ -18,7 +18,7 @@ function NavbarSearch() {
     } else {
       searchCryptos(searchInput)
       setSearchInput('')
-      navigate(`/search/${searchInput}`)
+      navigate(`/search/${searchInput}`, { state: isLoading })
     }
   }
 
