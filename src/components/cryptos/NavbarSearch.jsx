@@ -1,24 +1,30 @@
 import { useState, useContext } from 'react'
 import CryptoContext from '../../context/CryptoContext'
+import { searchCryptos } from '../../context/CryptoActions'
 import { useNavigate } from 'react-router-dom'
 
 function NavbarSearch() {
-  const { searchCryptos, isLoading } = useContext(CryptoContext)
-
-  const [searchInput, setSearchInput] = useState('')
+  const [input, setInput] = useState('')
 
   const navigate = useNavigate()
 
-  const handleChange = (e) => setSearchInput(e.target.value)
+  const { dispatch } = useContext(CryptoContext)
+
+  const handleChange = (e) => setInput(e.target.value)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (searchInput === '') {
+    if (input === '') {
       alert('Please enter something! (bitcoin, ethereum etc.)')
     } else {
-      searchCryptos(searchInput)
-      setSearchInput('')
-      navigate(`/search/${searchInput}`, { state: !isLoading })
+      dispatch({type: 'SET_LOADING'})
+      const getSearchData = async () => {
+        const searchData = await searchCryptos(input)
+        dispatch({type: 'GET_SEARCHED', payload: searchData})
+        navigate(`/search/${input}`)
+      }
+      getSearchData()
+      setInput('')
     }
   }
 
@@ -30,7 +36,7 @@ function NavbarSearch() {
           type='text'
           name='search'
           placeholder='Search...'
-          value={searchInput}
+          value={input}
           onChange={handleChange}
         />
         <button type='submit' className='absolute right-0 top-0 mt-3 mr-2'>
