@@ -7,11 +7,13 @@ import Watchlist from "./pages/Watchlist";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Search from "./pages/Search";
-import { CryptoProvider } from './context/CryptoContext'
+import { CryptoProvider } from './context/crypto/CryptoContext'
+import { UserProvider } from './context/user/UserContext'
 
 function App() {
   return (
     <CryptoProvider>
+    <UserProvider>
       <Router>
         <Navbar />
         <Routes>
@@ -25,6 +27,7 @@ function App() {
           <Route path="/search/:id" element={<Search />} />
         </Routes>
       </Router>
+    </UserProvider>
     </CryptoProvider>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
-import CryptoContext from '../../context/CryptoContext'
-import { searchCryptos } from '../../context/CryptoActions'
+import CryptoContext from '../../context/crypto/CryptoContext'
+import { searchCryptos } from '../../context/crypto/CryptoActions'
 import { useNavigate } from 'react-router-dom'
 
 function NavbarSearch() {
@@ -32,7 +32,7 @@ function NavbarSearch() {
     <div className='relative text-center mr-8 mx-auto text-gray-400 lg:block hidden'>
       <form onSubmit={handleSubmit}>
         <input
-          className='border-2 border-gray-400 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none'
+          className='border-2 border-slate-800 bg-slate-800 h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none'
           type='text'
           name='search'
           placeholder='Search...'

@@ -1,5 +1,9 @@
+import SignUpBox from "../components/users/SignUpBox";
+
 function Signup() {
-  return <div>Sign up page</div>;
+  return <div>
+    <SignUpBox />
+  </div>;
 }
 
 export default Signup;
