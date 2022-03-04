@@ -1,18 +1,19 @@
-import { auth } from '../../firebase-config'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import UserContext from '../../context/user/UserContext'
 
 function SignUp() {
+  const { signUp } = useContext(UserContext)
+
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
 
-  const register = async () => {
+  const navigate = useNavigate()
+
+  const handleSubmit = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth, 
-        registerEmail, 
-        registerPassword
-        )
+      signUp(registerEmail, registerPassword)
+      navigate('/login')
     } catch (err) {
       console.log(err.message)
     }
@@ -29,7 +30,7 @@ function SignUp() {
     onChange={(e) => {
       setRegisterPassword(e.target.value)
     }} />
-    <button onClick={register}>Create user</button>
+    <button onClick={handleSubmit}>Create user</button>
     </div>
   )
 }
