@@ -1,8 +1,23 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { useNavigate } from "react-router-dom"
+import UserContext from "../../context/user/UserContext"
 
 function LogIn() {
+  const { logIn } = useContext(UserContext)
+
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async () => {
+    try {
+      logIn(loginEmail, loginPassword)
+      navigate('/')
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 
   return (
     <div>
@@ -15,7 +30,7 @@ function LogIn() {
       onChange={(e) => {
         setLoginPassword(e.target.value)
       }} />
-      <button>Login</button>
+      <button onClick={handleSubmit}>Login</button>
     </div>
   )
 }
