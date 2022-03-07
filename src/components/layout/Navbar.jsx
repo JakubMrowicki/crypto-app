@@ -1,4 +1,7 @@
+import { useContext, useEffect } from "react"
 import NavbarSearch from "../cryptos/NavbarSearch"
+import UserContext from "../../context/user/UserContext"
+import { auth } from "../../firebase-config"
 
 const navigation = [
     { name: 'Dashboard', href: '/', current: true },
@@ -10,6 +13,17 @@ function classNames(...classes) {
 }
 
 function Navbar() {
+
+  const { getUser, signOut } = useContext(UserContext)
+
+  useEffect(() => {
+    const getCurrentUserLoggedIn = async () => {
+      const currentUserLoggedIn = await getUser()
+      console.log(currentUserLoggedIn)
+    }
+    getCurrentUserLoggedIn()
+  })
+
   return (
   <nav className="bg-slate-700 mx-auto">
     <div className="container mx-auto px-8">
@@ -33,14 +47,18 @@ function Navbar() {
               </a>
             ))}
           </div>
+        </div>
+        <div className="absolute right-0 flex items-center">
+          <NavbarSearch />
+          <div className="hidden flex items-center font-light space-x-2 sm:block">
+            {!auth.currentUser
+              ? <><a className="text-white px-3 py-2 rounded-md text-sm" href="/login">Log In</a>
+                <a className="bg-slate-800 text-white px-3 py-2 rounded-md text-sm" href="/signup">Sign Up</a></>
+              : <><a className="text-white px-3 py-2 rounded-md text-sm" href="/profile">Profile</a>
+                <a className="bg-slate-800 text-white px-3 py-2 rounded-md text-sm" href="/" onClick={signOut}>Sign Out</a></>
+            }
           </div>
-          <div className="absolute right-0 flex items-center">
-            <NavbarSearch />
-            <div className="hidden flex items-center font-light space-x-2 sm:block">
-              <a className="text-white px-3 py-2 rounded-md text-sm" href="/login">Log In</a>
-              <a className="bg-slate-800 text-white px-3 py-2 rounded-md text-sm" href="/signup">Sign Up</a>
-            </div>
-          </div>
+        </div>
       </div>
     </div>
   </nav>

@@ -6,12 +6,10 @@ const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({})
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user)
-      setLoading(false)
     })
 
     return unsubscribe
@@ -22,7 +20,7 @@ export const UserProvider = ({ children }) => {
   }
 
   const signOut = () => {
-    return signOut()
+    return auth.signOut()
   }
 
   const signUp = (email, password) => {

@@ -29,7 +29,7 @@ function NavbarSearch() {
   }
 
   return (
-    <div className='relative text-center mr-8 mx-auto text-gray-400 lg:block hidden'>
+    <div className='relative text-center mr-2 mx-auto text-gray-400 md:block hidden'>
       <form onSubmit={handleSubmit}>
         <input
           className='border-2 border-slate-800 bg-slate-800 h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none'

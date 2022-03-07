@@ -20,17 +20,21 @@ function SignUp() {
   }
 
   return (
-    <div>
-      <h3>Sign up</h3>
-    <input placeholder="Email..." 
-    onChange={(e) => {
-      setRegisterEmail(e.target.value)
-    }} />
-    <input placeholder="Password..." 
-    onChange={(e) => {
-      setRegisterPassword(e.target.value)
-    }} />
-    <button onClick={handleSubmit}>Create user</button>
+    <div className='container mx-auto flex-col'>
+      <div className='py-8'>
+        <h3 className='text-xl'>Create Account</h3>
+      </div>
+      <div className='grid grid-cols-1'>
+        <input className='bg-slate-700 my-2 w-64' placeholder="Email..." 
+        onChange={(e) => {
+          setRegisterEmail(e.target.value)
+        }} />
+        <input className='bg-slate-700 w-64 my-2' placeholder="Password..." 
+        onChange={(e) => {
+          setRegisterPassword(e.target.value)
+        }} />
+      </div>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   )
 }
