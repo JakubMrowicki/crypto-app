@@ -19,7 +19,7 @@ function FeaturedCryptos() {
 
     return (
     <div className='bg-slate-800 h-screen'>
-      <div className='container mx-auto flex-col'>
+      <div className='container mx-auto flex flex-col'>
         <div className='text-start p-8'>
           <h2 className='text-white font-light text-2xl'>Top Cryptos</h2>
         </div>
@@ -39,6 +39,7 @@ function FeaturedCryptos() {
                   <span className='flex green'><FiArrowUpRight />{c.price_change_percentage_24h.toFixed(2)}</span>
                 </div>
               )}
+              <button className='bg-slate-800 text-white font-light mt-2 px-3 py-2 rounded-md text-sm'>Add to Watchlist</button>
             </div>
             ))}
           </div>

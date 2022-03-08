@@ -34,7 +34,7 @@ function SignUp() {
           setRegisterPassword(e.target.value)
         }} />
       </div>
-      <button onClick={handleSubmit}>Submit</button>
+      <button className='my-2 bg-slate-700 text-white px-3 py-2 rounded-md' onClick={handleSubmit}>Submit</button>
     </div>
   )
 }
